@@ -4,6 +4,13 @@ from jax.experimental import ode
 from functools import partial
 
 def make_flow(vec_field_net, X0, X1, mxstep=1000, div_fn=None):
+    """
+    vec_field_net:
+    X0:
+    X1:
+    mxstep:
+    div_fn:
+    """
 
     def divergence_fwd(f):
         def _div_f(params, x, t):
