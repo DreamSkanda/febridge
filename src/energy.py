@@ -17,4 +17,4 @@ def make_free_energy(batched_sampler, energy_fun_0, energy_fun_1, n, dim):
 
         return f.mean(), f.std()/jnp.sqrt(batchsize), f
     
-    return free_energy
+    return free_energy_bound
