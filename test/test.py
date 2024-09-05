@@ -5,6 +5,7 @@ sys.path.append(src_path)
 
 import jax
 from jax import random
+import jax.numpy as jnp
 from mcmc import mcmc_fun
 from bridge import fediff
 
