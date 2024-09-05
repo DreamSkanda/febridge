@@ -8,7 +8,7 @@ from jax import random
 from mcmc import mcmc_fun
 from bridge import fediff
 
-rng = 42
+rng = random.PRNGKey(42)
 n = 6
 dim = 2
 
