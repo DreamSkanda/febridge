@@ -9,7 +9,7 @@ from loss import make_loss
 from energy import make_free_energy
 from train import train_and_evaluate
 
-def fediff(rng, X0, X1, logp_fun_0, logp_fun_1, n, dim, nheads=2, nlayers=2, keysize=2, epochs=1000, batchsize=2048, lr=0.01, sign=1):
+def fediff(rng, X0, X1, logp_fun_0, logp_fun_1, n, dim, sign=1, path=os.getcwd(), nheads=2, nlayers=2, keysize=2, epochs=1000, batchsize=2048, lr=0.01):
 
     """
     rng: random key
