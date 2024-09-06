@@ -13,7 +13,7 @@ def make_flow(vec_field_net, X0, X1, mxstep=1000, div_fn=None):
     """
 
     def divergence_fwd(f):
-        def _div_f(params, x, t):
+        def _div_f(params, x, t, v):
             jac = jax.jacfwd(lambda x: f(params, x, t))
             return jnp.trace(jac(x))
         return _div_f
