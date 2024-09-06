@@ -22,7 +22,7 @@ def fediff(rng, X0, X1, logp_fun_0, logp_fun_1, n, dim, nheads=2, nlayers=2, key
     init_rng, rng = jax.random.split(rng)
 
     print("\n========== Processing samples ==========")
-    if X0.shape[0] < batchsize or X1 < batchsize:
+    if X0.shape[0] < batchsize or X1.shape[0] < batchsize:
         print("\nYour sample set size is smaller than the batch size you have set.")
         sys.exit(1)
     elif X0.shape[0] != X1.shape[0]:
