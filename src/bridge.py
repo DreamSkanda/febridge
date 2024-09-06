@@ -1,6 +1,7 @@
 import jax
 import time
 import os
+import sys
 
 from net import make_transformer
 from flow import make_flow
@@ -8,7 +9,7 @@ from loss import make_loss
 from energy import make_free_energy
 from train import train_and_evaluate
 
-def fediff(rng, X0, X1, logp_fun_0, logp_fun_1, n, dim, nheads=2, nlayers=2, keysize=2, epochs=1000, iterations=100, batchsize=2048, sign=1):
+def fediff(rng, X0, X1, logp_fun_0, logp_fun_1, n, dim, nheads=2, nlayers=2, keysize=2, epochs=1000, batchsize=2048, sign=1):
 
     """
     rng: random key
@@ -19,6 +20,27 @@ def fediff(rng, X0, X1, logp_fun_0, logp_fun_1, n, dim, nheads=2, nlayers=2, key
     """
     
     init_rng, rng = jax.random.split(rng)
+
+    print("\n========== Processing samples ==========")
+    if X0.shape[0] < batchsize or X1 < batchsize:
+        print("\nYour sample set size is smaller than the batch size you have set.")
+        sys.exit(1)
+    elif X0.shape[0] != X1.shape[0]:
+        print("\nThe sizes of X0 and X1 are not equal.")
+        sys.exit(1)
+        # datasize = min(X0.shape[0], X1.shape[0])
+        # iterations = int(0.8 * datasize // batchsize)
+    else:
+        print("\nThe sizes of X0 and X1 are equal.")
+        datasize = X0.shape[0]
+        # Calculate the target train size
+        target_train_size = int(datasize * 0.8)
+        # Adjust the train size so that it can be divisible by the batch size
+        train_size = (target_train_size // batchsize) * batchsize
+        # Adjust the validation size so that it can be divisible by the batch size
+        remaining_size = datasize - train_size
+        val_size = (remaining_size // batchsize) * batchsize
+        print(f"Train size: {train_size}, Validation size: {val_size}")
     
     print("\n========== Constructing transformer network ==========")
     params, vec_field_net = make_transformer(init_rng, n, dim, nheads, nlayers, keysize)
@@ -37,8 +59,8 @@ def fediff(rng, X0, X1, logp_fun_0, logp_fun_1, n, dim, nheads=2, nlayers=2, key
     print("\n========== Training ==========")
     hyperparams = (epochs, iterations, batchsize)
     
-    training_data = (X0[0:iterations*batchsize], X1[0:iterations*batchsize])
-    validation_data = (X0[iterations*batchsize:datasize], X1[iterations*batchsize:datasize])
+    training_data = (X0[0:train_size], X1[0:train_size])
+    validation_data = (X0[train_size:train_size+val_size], X1[train_size:train_size+val_size])
 
     start = time.time()
     params = train_and_evaluate(rng, loss, value_and_grad, hyperparams, params, training_data, validation_data, lr, path)
