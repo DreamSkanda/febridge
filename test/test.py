@@ -4,8 +4,10 @@ src_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../src'))
 sys.path.append(src_path)
 
 import jax
-from jax import random
 import jax.numpy as jnp
+from jax import random
+from jax.scipy.stats import norm
+
 from mcmc import mcmc_fun
 from bridge import fediff
 
