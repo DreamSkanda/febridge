@@ -36,7 +36,8 @@ def fediff(rng, X0, X1, logp_fun_0, logp_fun_1, n, dim, nheads=2, nlayers=2, key
         # Calculate the target train size
         target_train_size = int(datasize * 0.8)
         # Adjust the train size so that it can be divisible by the batch size
-        train_size = (target_train_size // batchsize) * batchsize
+        iterations = target_train_size // batchsize
+        train_size = iterations * batchsize
         # Adjust the validation size so that it can be divisible by the batch size
         remaining_size = datasize - train_size
         val_size = (remaining_size // batchsize) * batchsize
