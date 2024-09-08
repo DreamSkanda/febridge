@@ -40,7 +40,7 @@ def make_flow(vec_field_net, X0, X1, mxstep=1000):
         return xt
     """
     
-    @partial(jax.vmap, in_axes=(None, 0, 0), out_axes=(0,0,0))
+    @partial(jax.vmap, in_axes=(None, 0, None), out_axes=(0,0,0))
     def integrate_with_logp(params, x0, sign):
         def _ode(state, t):
             x = state[0]  
