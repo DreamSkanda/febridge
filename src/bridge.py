@@ -48,7 +48,7 @@ def fediff(rng, X0, X1, logp_fun_0, logp_fun_1, n, dim, sign=1, path=os.getcwd()
     modelname = "transformer_nl_%d_nh_%d_nk_%d" % (nlayers, nheads, keysize)
     
     """initializing the sampler and logp calculator"""
-    sample_fn, sample_and_logp_fn = make_flow(vec_field_net, X0, X1)
+    sample_and_logp_fn = make_flow(vec_field_net, X0, X1)
     free_energy = make_free_energy(sample_and_logp_fn, logp_fun_0, logp_fun_1, n, dim)
     
     """initializing the loss function"""
