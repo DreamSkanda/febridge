@@ -14,8 +14,8 @@ def make_free_energy(batched_sampler, logp_fun_0, logp_fun_1, n, dim):
 
         print(x0.shape, x1.shape)
 
-        e0 = jax.vmap(energy_fun_0, (0, None, None))(x0.reshape(batchsize, n, dim), n, dim)
-        e1 = jax.vmap(energy_fun_1, (0, None, None))(x1.reshape(batchsize, n, dim), n, dim)
+        e0 = jax.vmap(logp_fun_0, (0, None, None))(x0.reshape(batchsize, n, dim), n, dim)
+        e1 = jax.vmap(logp_fun_1, (0, None, None))(x1.reshape(batchsize, n, dim), n, dim)
 
         print(e0.shape, e1.shape)
         
