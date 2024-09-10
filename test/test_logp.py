@@ -1,5 +1,7 @@
 import unittest
 import numpy as np
+
+import jax
 from jax.scipy.stats import norm
 import jax.numpy as jnp
 
