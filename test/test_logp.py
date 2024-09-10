@@ -24,11 +24,13 @@ class TestFunctions(unittest.TestCase):
     def test_logp_fun_0_output(self):
         # 测试 logp_fun_0 的输出维度
         result = logp_fun_0(self.x, self.n, self.dim)
+        print(result)
         self.assertIsInstance(result, np.float64, "Output of logp_fun_0 is not a scalar")
 
     def test_logp_fun_1_output(self):
         # 测试 logp_fun_1 的输出维度
         result = logp_fun_1(jnp.array(self.x), self.n, self.dim)
+        print(result)
         self.assertIsInstance(result, jnp.ndarray, "Output of logp_fun_1 is not a jax.numpy array")
         self.assertEqual(result.shape, (), "Output of logp_fun_1 is not a scalar array")
 
