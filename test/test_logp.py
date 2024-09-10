@@ -25,7 +25,7 @@ class TestFunctions(unittest.TestCase):
         # 测试 logp_fun_0 的输出维度
         result = logp_fun_0(self.x, self.n, self.dim)
         print(result)
-        self.assertIsInstance(result, np.float64, "Output of logp_fun_0 is not a scalar")
+        self.assertIsInstance(result, (float, np.float64), "Output of logp_fun_0 is not a scalar")
 
     def test_logp_fun_1_output(self):
         # 测试 logp_fun_1 的输出维度
