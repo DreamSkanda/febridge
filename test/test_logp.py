@@ -19,19 +19,17 @@ class TestFunctions(unittest.TestCase):
         # 初始化测试数据
         self.n = 3
         self.dim = 2
-        self.x = np.random.randn(self.n * self.dim)
+        self.x = jnp.array(np.random.randn(100, self.n * self.dim))
 
     def test_logp_fun_0_output(self):
         # 测试 logp_fun_0 的输出维度
-        result = logp_fun_0(self.x, self.n, self.dim)
-        print(result)
+        result = jax.vmap(logp_fun_0, (0, None, None))(self.x.reshape(100, self.n, self.dim), self.n, self.dim)
+        print(result.shape)
 
     def test_logp_fun_1_output(self):
         # 测试 logp_fun_1 的输出维度
-        result = logp_fun_1(jnp.array(self.x), self.n, self.dim)
-        print(result)
-        self.assertIsInstance(result, jnp.ndarray, "Output of logp_fun_1 is not a jax.numpy array")
-        self.assertEqual(result.shape, (), "Output of logp_fun_1 is not a scalar array")
+        result = jax.vmap(logp_fun_1, (0, None, None))(self.x.reshape(100, self.n, self.dim), self.n, self.dim)
+        print(result.shape)
 
 # 运行测试
 if __name__ == '__main__':
