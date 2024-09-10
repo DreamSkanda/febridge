@@ -7,7 +7,7 @@ import jax.numpy as jnp
 
 # 定义函数
 def logp_fun_0(x, n, dim):
-    return norm.logpdf(x).sum(-1)
+    return norm.logpdf(x).sum()
 
 def logp_fun_1(x, n, dim):
     i, j = jnp.triu_indices(n, k=1)
