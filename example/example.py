@@ -14,7 +14,7 @@ from bridge import fediff
 rng = random.PRNGKey(42)
 n = 6
 dim = 2
-data_size = 10240
+data_size = 102400
 
 def logp_fun_0(x, n, dim):
     return norm.logpdf(x).sum()
