@@ -1,0 +1,7 @@
+README.md
+setup.py
+src/febridge.egg-info/PKG-INFO
+src/febridge.egg-info/SOURCES.txt
+src/febridge.egg-info/dependency_links.txt
+src/febridge.egg-info/requires.txt
+src/febridge.egg-info/top_level.txt

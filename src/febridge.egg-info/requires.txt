@@ -1,0 +1,6 @@
+jax
+dm-haiku
+optax
+
+[testing]
+pytest

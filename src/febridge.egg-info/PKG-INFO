@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: febridge
+Version: 0.0.1
+Summary: Free energy difference calculation between two systems.
+Home-page: https://github.com/DreamSkanda/febridge
+Author: Lu Zhao
+Author-email: zhaolu@iphy.ac.cn
+Platform: any
+Requires-Dist: jax
+Requires-Dist: dm-haiku
+Requires-Dist: optax
+Provides-Extra: testing
+Requires-Dist: pytest; extra == "testing"

@@ -9,7 +9,6 @@ from jax import random
 from jax.scipy.stats import norm
 
 from mcmc import mcmc_fun
-from bridge import fediff
 
 rng = random.PRNGKey(42)
 n = 6
@@ -41,7 +40,7 @@ def sampler(rng, n, dim, mc_epoch=20, mc_steps=100, mc_width=0.05):
 
 X0, X1 = sampler(sample_rng, n, dim)
 
-fe, fe_err = fediff(rng, X0, X1, logp_fun_0, logp_fun_1, n, dim, nheads=2, nlayers=2, keysize=2, epochs=100, batchsize=2048, sign=1)
+fe, fe_err = model_train(rng, X0, X1, logp_fun_0, logp_fun_1, )
 print(fe, fe_err)
 
     

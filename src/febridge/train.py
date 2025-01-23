@@ -3,7 +3,7 @@ import jax.numpy as jnp
 import optax
 import haiku as hk
 
-import checkpoint
+from .checkpoint import save_data
 import os
 from typing import NamedTuple
 import itertools
@@ -57,7 +57,7 @@ def train(rng, value_and_grad, hyperparams, params, data, lr, path):
             ckpt = {"params": state.params,
                    }
             ckpt_filename = os.path.join(path, "epoch_%06d.pkl" %(epoch))
-            checkpoint.save_data(ckpt, ckpt_filename)
+            save_data(ckpt, ckpt_filename)
             print("Save checkpoint file: %s" % ckpt_filename)
 
     f.close()
@@ -133,7 +133,7 @@ def train_and_evaluate(rng, loss, value_and_grad, hyperparams, params, training_
             ckpt = {"params": state.params,
                    }
             ckpt_filename = os.path.join(path, "epoch_%06d.pkl" %(epoch))
-            checkpoint.save_data(ckpt, ckpt_filename)
+            save_data(ckpt, ckpt_filename)
             print("Save checkpoint file: %s" % ckpt_filename)
 
     f.close()

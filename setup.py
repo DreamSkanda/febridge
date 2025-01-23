@@ -3,18 +3,12 @@ import unittest
 from setuptools import setup
 from setuptools import find_packages
 
-REQUIRED_PACKAGES = [
-    'jax', 'haiku', 'optax', 'pickle',
-    'os', 'sys', 're',
-    'functools', 'itertools', 'typing'
-]
+REQUIRED_PACKAGES = ['jax', 'dm-haiku', 'optax']
 
 def febridge_test_suite():
     test_loader = unittest.TestLoader()
     test_suite = test_loader.discover('./test', pattern='test_*.py')
     return test_suite
-
-print(find_packages())
 
 setup(
     name='febridge',
@@ -24,7 +18,8 @@ setup(
     author='Lu Zhao',
     author_email='zhaolu@iphy.ac.cn',
     # Contained modules and scripts.
-    packages=find_packages(),
+    packages=find_packages(where='src'),
+    package_dir={'': 'src'},
     install_requires=REQUIRED_PACKAGES,
     extras_require={'testing': ['pytest']},
     platforms=['any'],
