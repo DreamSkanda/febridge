@@ -16,7 +16,7 @@ setup(
     description='Free energy difference calculation between two systems.',
     url='https://github.com/DreamSkanda/febridge',
     author='Lu Zhao',
-    author_email='zhaolu@iphy.ac.cn',
+    author_email='zhaoluchn@outlook.com',
     # Contained modules and scripts.
     packages=find_packages(where='src'),
     package_dir={'': 'src'},
